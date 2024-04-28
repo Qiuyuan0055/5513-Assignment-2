@@ -1,0 +1,75 @@
+---
+title: "ETC5513_Assignment_2"
+format: 
+  pdf:
+    toc: true
+    toc-depth: 2
+editor: visual
+author: 
+  Andy, Anshuman, Big, Minni
+---
+
+\newpage
+
+# Executive summary
+
+# Introduction
+
+# Methodology
+
+```{r echo=FALSE, warning=FALSE,message=FALSE,fig.cap="Distribution of Fatalities by State in Australia", fig.lab="fig:state_fatalities"}
+library(readxl)
+library(tidyverse)
+data = read_excel("bitre_fatalities_mar_2024.xlsx", sheet = 2, skip = 4)
+fata_state = data |> group_by(State) |> summarise(fatalities = n())
+library(ggplot2)
+# Creating the plot
+ggplot(fata_state, aes(x = reorder(State, -fatalities), y = fatalities)) +
+  geom_bar(stat = "identity", color = "black", show.legend = FALSE) +
+  geom_text(aes(label = fatalities), vjust = -0.3) +
+  labs(title = "Distribution of Fatalities by State in Australia",
+       x = "State",
+       y = "Number of Fatalities") +
+  theme_minimal() 
+
+```
+
+```{r echo=FALSE, warning=FALSE,message=FALSE,fig.cap="Fatalities by State in Australia", fig.lab="fig:state_fatalities_map"}
+
+library(dplyr)
+library(sf)
+
+state_names <- c(ACT = "Australian Capital Territory",
+                 NSW = "New South Wales",
+                 NT = "Northern Territory",
+                 Qld = "Queensland",
+                 SA = "South Australia",
+                 Tas = "Tasmania",
+                 Vic = "Victoria",
+                 WA = "Western Australia")
+
+# Apply the mapping to the data frame
+fata_state$StateNm <- state_names[fata_state$State]
+
+data_path = "STE_2021_AUST_SHP_GDA2020/STE_2021_AUST_GDA2020.shp" 
+aus_map <- read_sf(here::here(data_path))
+
+aus_map = aus_map |>
+  left_join(fata_state, by = c("STE_NAME21"="StateNm"))
+
+ggplot(data = aus_map) +
+  geom_sf(aes(fill = fatalities), color = "white") +  # Fill regions based on fatalities, outline them in white
+  coord_sf(xlim = c(112, 152)) +
+  # geom_sf_label(aes(label = State), size = 3) +  # Add labels for each state
+  scale_fill_viridis_c(option = "magma", name = "Fatalities") +  # Use a color scale for fatalities
+  labs(title = "Fatalities by State in Australia",
+       subtitle = "Geospatial distribution of fatalities") +
+  theme_minimal() +
+  theme(legend.position = "right")  # Adjust legend position
+```
+
+# Results
+
+# Discussion
+
+# Reference section
