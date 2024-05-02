@@ -5,17 +5,22 @@ format:
     toc: true
     toc-depth: 2
 editor: visual
-author: 
-  Andy, Anshuman, Big, Minni
+author: Andy, Anshuman, Big, Minni
 ---
 
 \newpage
 
 # Executive summary
 
+The purpose of this research is to examine the current state of road accidents in various Australian jurisdictions. By gathering the most recent road accident data from each state and presenting it in graphical form, it was discovered that New South Wales had the highest number of accidents (17,084), followed by Victoria and Queensland. There were comparatively few accidents in Western Australia, South Australia, the Northern Territory, Tasmania, and the Australian Capital Territory. This analysis provides a foundation for developing targeted road safety strategies.
+
 # Introduction
 
+Road safety is a commonly discussed social topic. Understanding the road accident status in various states can assist the government and relevant departments in implementing targeted road safety measures. This study gathered and analyzed the most recent road accident data from all states in Australia, with the goal of creating a foundation for improved road safety.
+
 # Methodology
+
+This study utilized a quantitative analytic strategy. In 2023, it collected road accident data from all Australian states and used bar charts and maps to visually represent the incidence of incidents in each state.
 
 ```{r echo=FALSE, warning=FALSE,message=FALSE,fig.cap="Distribution of Fatalities by State in Australia", fig.lab="fig:state_fatalities"}
 library(readxl)
@@ -70,6 +75,12 @@ ggplot(data = aus_map) +
 
 # Results
 
+According to the data analysis, New South Wales had the most road accidents (17,084), followed by Victoria (12,231) and Queensland (11,211). The number of accidents in Western Australia, South Australia, the Northern Territory, Tasmania, and the Australian Capital Territory were quite low, with 6,699, 4,785, 1,746, 1,650, and 504 correspondingly.
+
 # Discussion
 
+According to the findings of this study, the number of road accidents is relatively high in New South Wales, Victoria, and Queensland, which may be due to their greater populations and higher road density. The number of accidents in Western Australia, South Australia, and other states is comparatively low, which could be attributed to their smaller populations and lower road congestion. In the future, more research should be done on the causes of the disparities in road accidents between states, and specific safety measures should be implemented to improve the country's general level of road safety.
+
 # Reference section
+
+Bureau of Infrastructure, T. and R. E. (2021). *Australian Road Deaths Database*. Bureau of Infrastructure, Transport and Regional Economics. https://www.bitre.gov.au/statistics/safety/fatal_road_crash_database
